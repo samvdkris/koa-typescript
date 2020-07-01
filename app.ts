@@ -8,6 +8,7 @@ const router = new KoaRouter();
 
 router
 	.get('/', r_index)
+	.get('/hello/:name', r_hello)
 	.get('/json', r_json);
 app.use(router.routes());
 
@@ -15,6 +16,11 @@ app.use(router.routes());
 
 async function r_index(ctx) {
 	ctx.body = 'Hello index!';
+}
+
+async function r_hello(ctx) {
+	let name = ctx.params.name;
+	ctx.body = `Hello ${name}!`;
 }
 
 async function r_json(ctx) {
@@ -27,8 +33,5 @@ async function r_json(ctx) {
 
 
 
-
-// Router middleware
-// app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3000, () => console.log("Server started..."));
